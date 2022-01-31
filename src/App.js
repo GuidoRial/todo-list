@@ -4,6 +4,8 @@ import uniqid from "uniqid";
 import DisplayTodos from "./Components/DisplayTodos";
 
 const App = () => {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [todos, setTodos] = useState([
         {
             title: "Learn React",
@@ -19,23 +21,33 @@ const App = () => {
         },
     ]);
 
+    const handleReset = () => {
+        Array.from(document.querySelectorAll("input")).forEach(
+            (input) => (input.value = "")
+        );
+    };
+
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+    };
     let newTodo = {
         title: "",
         description: "",
         id: uniqid(),
         completed: false,
     };
-
-    const handleTitleChange = (e) => {
-        newTodo.title = e.target.value;
-    };
-
-    const handleDescriptionChange = (e) => {
-        newTodo.description = e.target.value;
-    };
     const onSubmitTodo = (e) => {
         e.preventDefault();
+        newTodo.title = title;
+        newTodo.description = description;
         setTodos([...todos, newTodo]);
+        setTitle("");
+        setDescription("");
+        handleReset();
     };
 
     const emptyTodoList = () => {
