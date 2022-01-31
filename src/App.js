@@ -9,28 +9,50 @@ const App = () => {
             title: "Learn React",
             description: "Dedicate this day to learn React",
             id: uniqid(),
-            complete: false,
+            completed: false,
         },
         {
             title: "Make dinner",
             description: "Pizza on a week day? crazy. I love it.",
             id: uniqid(),
-            complete: true,
+            completed: true,
         },
     ]);
-    console.log(todos);
+
+    let newTodo = {
+        title: "",
+        description: "",
+        id: uniqid(),
+        completed: false,
+    };
+
+    const handleTitleChange = (e) => {
+        newTodo.title = e.target.value;
+    };
+
+    const handleDescriptionChange = (e) => {
+        newTodo.description = e.target.value;
+    };
+    const onSubmitTodo = (e) => {
+        e.preventDefault();
+        setTodos([...todos, newTodo]);
+    };
+
+    const emptyTodoList = () => {
+        setTodos([]);
+    };
 
     return (
         <div className="App">
-            <form>
+            <form onSubmit={onSubmitTodo}>
                 <label htmlFor="title">Title:</label>
-                <input></input>
+                <input onChange={handleTitleChange}></input>
                 <label htmlFor="description">Description:</label>
-                <input></input>
+                <input onChange={handleDescriptionChange}></input>
                 <button type="submit">Add todo</button>
             </form>
 
-            <DisplayTodos todos={todos} />
+            <DisplayTodos todos={todos} emptyTodoList={emptyTodoList} />
         </div>
     );
 };
