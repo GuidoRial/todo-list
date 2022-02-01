@@ -122,6 +122,11 @@ const App = () => {
         setTodos(newTodoList);
     };
 
+    todos.sort((a, b) => {
+        const orders = { LOW: 2, MEDIUM: 1, HIGH: 0 };
+        return orders[a.priority] - orders[b.priority]
+    });
+
     return (
         <div className="App">
             <button onClick={openModal}>Add item to Todo List</button>

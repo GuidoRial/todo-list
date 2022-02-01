@@ -30,12 +30,9 @@ const DisplayTodos = ({
     const editTodo = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
-        if (editTitle === "" || editDescription === "") {
-            alert("Fields can't be empty");
-            return;
-        }
-        newTodo.title = editTitle;
-        newTodo.description = editDescription;
+        newTodo.title = editTitle === "" ? todo.title : editTitle;
+        newTodo.description =
+            editDescription === "" ? todo.description : editDescription;
         if (editPriority === "HIGH" || editPriority === "MEDIUM") {
             newTodo.priority = editPriority;
         } else {
