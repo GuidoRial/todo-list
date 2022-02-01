@@ -9,18 +9,21 @@ const App = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [priority, setPriority] = useState("LOW");
     const [todos, setTodos] = useState([
         {
             title: "Learn React",
             description: "Dedicate this day to learn React",
             id: uniqid(),
             completed: false,
+            priority: "HIGH",
         },
         {
-            title: "Make dinner",
-            description: "Pizza on a week day? crazy. I love it.",
+            title: "Give Guido a job as a front end developer",
+            description: "I didn't write that, your mind did.",
             id: uniqid(),
-            completed: true,
+            completed: false,
+            priority: "HIGH",
         },
     ]);
 
@@ -44,13 +47,27 @@ const App = () => {
         setDescription(e.target.value);
     };
 
+    const handlePriorityChange = (e) => {
+        setPriority(e.target.value);
+    };
+
     const onSubmitTodo = (e) => {
         e.preventDefault();
+        if (title === "" || description === "") {
+            alert("Fields can't be empty");
+            return;
+        }
         newTodo.title = title;
         newTodo.description = description;
+        if (priority === "HIGH" || priority === "MEDIUM") {
+            newTodo.priority = priority;
+        } else {
+            newTodo.priority = "LOW";
+        }
         setTodos([...todos, newTodo]);
         setTitle("");
         setDescription("");
+        setPriority("LOW");
         handleReset();
         closeModal();
     };
@@ -64,6 +81,7 @@ const App = () => {
         description: "",
         id: uniqid(),
         completed: false,
+        priority: "LOW",
     };
 
     const findTodoIndex = (task) => {
@@ -78,11 +96,35 @@ const App = () => {
         setTodos(newTodoList);
     };
 
+    const scratchTextStyle = {
+        textDecorationLine: "line-through",
+        textDecorationStyle: "solid",
+    };
+
+    const normalTextStyle = {
+        textDecorationLine: "none",
+        textDecorationStyle: "none",
+    };
+
+    const [textStyle, setTextStyle] = useState(normalTextStyle);
+
+    const addScratch = () => {
+        console.log("test");
+    };
+
+    const toggleComplete = (todo) => {
+        let todoIndex = findTodoIndex(todo);
+        let newTodoList = [...todos];
+        if (newTodoList[todoIndex].completed === false) {
+            newTodoList[todoIndex].completed = true;
+        } else {
+            newTodoList[todoIndex].completed = false;
+        }
+    };
+
     return (
         <div className="App">
-            <button onClick={openModal}>
-                <i className="fa fa-plus-square" aria-hidden="true"></i>
-            </button>
+            <button onClick={openModal}>Add item to Todo List</button>
             <Modal isOpen={modalIsOpen} ariaHideApp={false}>
                 <button onClick={closeModal}>Close</button>
                 <form onSubmit={onSubmitTodo}>
@@ -90,6 +132,12 @@ const App = () => {
                     <input onChange={handleTitleChange}></input>
                     <label htmlFor="description">Description:</label>
                     <input onChange={handleDescriptionChange}></input>
+                    <label htmlFor="priority"></label>
+                    <select onChange={handlePriorityChange}>
+                        <option value={"LOW"}>LOW</option>
+                        <option value={"MEDIUM"}>MEDIUM</option>
+                        <option value={"HIGH"}>HIGH</option>
+                    </select>
                     <button type="submit">
                         <i className="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
@@ -100,6 +148,7 @@ const App = () => {
                 todos={todos}
                 emptyTodoList={emptyTodoList}
                 deleteTodo={deleteTodo}
+                toggleComplete={toggleComplete}
             />
 
             <Footer />
