@@ -47,13 +47,17 @@ const DisplayTodos = ({
     };
 
     return (
-        <div>
-            <button onClick={emptyTodoList}>Empty Todo List</button>
-            <div>
+        <div className="todo-main-container">
+            <button onClick={emptyTodoList} className="empty-todo-button">
+                <i className="fa fa-trash-o" />
+                Empty Todo List
+            </button>
+            <div className="todo-container">
                 {todos.map((todo) => {
                     return (
-                        <div key={todo.id}>
+                        <div className="todo" key={todo.id}>
                             <div
+                                className="todo-title"
                                 style={{
                                     textDecorationLine:
                                         todo.completed === true
@@ -68,6 +72,7 @@ const DisplayTodos = ({
                                 {todo.title}
                             </div>
                             <div
+                                className="todo-description"
                                 style={{
                                     textDecorationLine:
                                         todo.completed === true
@@ -81,33 +86,41 @@ const DisplayTodos = ({
                             >
                                 {todo.description}
                             </div>
-                            <div>{todo.priority}</div>
-                            <button onClick={() => toggleComplete(todo)}>
-                                <i
-                                    className="fa fa-check-square"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
-                            <button onClick={() => toggleEdit(todo)}>
-                                <i className="fas fa-edit"></i>
-                            </button>
+                            <div className="todo-priority">{todo.priority}</div>
+                            <div className="todo-button-container">
+                                <button
+                                    onClick={() => toggleComplete(todo)}
+                                    className="action-button toggle-complete"
+                                >
+                                    <i className="fa fa-check-square" />
+                                </button>
+                                <button
+                                    onClick={() => toggleEdit(todo)}
+                                    className="action-button toggle-edit"
+                                >
+                                    <i className="fas fa-edit" />
+                                </button>
 
-                            <button onClick={() => deleteTodo(todo)}>
-                                <i
-                                    className="fa fa-trash-o"
-                                    aria-hidden="true"
-                                ></i>
-                            </button>
+                                <button
+                                    onClick={() => deleteTodo(todo)}
+                                    className="action-button delete-todo"
+                                >
+                                    <i className="fas fa-minus-circle" />
+                                </button>
+                            </div>
+
                             {todo.edit === true && (
-                                <div>
+                                <div className="edit-todo">
                                     <label htmlFor="title">New Title:</label>
                                     <input
+                                        placeholder="Add a new title"
                                         onChange={handleEditedTitleChange}
                                     ></input>
                                     <label htmlFor="description">
                                         New description:
                                     </label>
                                     <input
+                                        placeholder="Add a new description"
                                         onChange={handleEditedDescriptionChange}
                                     ></input>
                                     <label htmlFor="priority"></label>
@@ -118,7 +131,11 @@ const DisplayTodos = ({
                                         <option value={"MEDIUM"}>MEDIUM</option>
                                         <option value={"HIGH"}>HIGH</option>
                                     </select>
-                                    <button onClick={() => editTodo(todo)}>
+                                    <button
+                                        onClick={() => editTodo(todo)}
+                                        className="add-todo-button edit-todo-button"
+                                    >
+                                        <i className="fas fa-edit" />
                                         Edit Todo
                                     </button>
                                 </div>

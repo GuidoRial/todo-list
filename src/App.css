@@ -1,5 +1,9 @@
 .App {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 body {
@@ -10,6 +14,8 @@ body {
     position: fixed;
     left: 0;
     bottom: 0;
+    border: none;
+    border-bottom: 1px solid rgb(108, 129, 205);
     width: 100%;
     font-size: 30px;
 }
@@ -57,6 +63,7 @@ body {
     cursor: pointer;
 }
 
+border-bottom: 1px solid rgb(108, 129, 205);
 .add-todo-form {
     display: flex;
     justify-content: center;
@@ -84,6 +91,22 @@ select {
     color: rgb(108, 129, 205);
 }
 
+.main-container,
+.todo-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-container {
+    width: 80%;
+}
+
+.todo-main-container {
+    width: 75%;
+}
+
 .add-todo-button {
     border: none;
     border-radius: 5px;
@@ -92,4 +115,115 @@ select {
     margin-top: 5px;
     color: rgb(108, 129, 205);
     cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.empty-todo-button {
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    height: 25px;
+    margin-top: 10px;
+    color: rgb(108, 129, 205);
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.todo-container {
+    background-color: white;
+    margin-top: 20px;
+    width: 150%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo {
+    display: flex;
+    width: 95%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 5px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.todo-title,
+.todo-description,
+.todo-priority,
+.todo-button-container {
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    text-align: left;
+}
+
+.todo-title {
+    font-weight: 700;
+    color: rgb(108, 129, 205);
+}
+
+.todo-description {
+    font-weight: 500;
+    color: rgba(108, 129, 205, 0.8);
+}
+
+.todo-button-container {
+    gap: 3px;
+}
+
+.action-button {
+    border: none;
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    color: rgb(108, 129, 205);
+    cursor: pointer;
+}
+
+.edit-todo-button {
+    width: 100px;
+    height: 29px;
+}
+
+.edit-todo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-todo > input {
+    border: none;
+    border-bottom: 1px solid rgb(108, 129, 205);
+    border-radius: 5px;
+    width: 300px;
+    height: 25px;
+    padding: 3px;
+}
+
+.edit-todo > input:focus {
+    border: none;
+    border: none;
+    border-bottom: 1px solid rgb(108, 129, 205);
+    outline: none;
+}
+
+.todo-priority {
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(108, 129, 205, 0.8);
+    color: white;
 }

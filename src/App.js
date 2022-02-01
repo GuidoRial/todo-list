@@ -4,7 +4,7 @@ import Footer from "./Components/Footer";
 import uniqid from "uniqid";
 import Modal from "react-modal";
 import DisplayTodos from "./Components/DisplayTodos";
-import Header from "./Components/Header"
+import Header from "./Components/Header";
 
 const App = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -151,9 +151,11 @@ const App = () => {
 
     return (
         <div className="App">
-            <Header/>
+            <Header />
             <div className="main-container">
-                <button onClick={openModal}>Add item to Todo List</button>
+                <button onClick={openModal} className="add-todo-button">
+                    <i className="fas fa-plus" /> ADD NEW TODO
+                </button>
                 <div className="modal-container">
                     <Modal
                         isOpen={modalIsOpen}
@@ -180,7 +182,9 @@ const App = () => {
                                 </select>
                             </div>
 
-                            <button type="submit" className="add-todo-button">Add new Todo</button>
+                            <button type="submit" className="add-todo-button">
+                                <i class="fas fa-plus" /> ADD NEW TODO
+                            </button>
                         </form>
                     </Modal>
                 </div>
