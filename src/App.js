@@ -11,6 +11,8 @@ const App = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("LOW");
+
+    //Set the initial tasks, notice how they're not ordered in any way
     const [todos, setTodos] = useState([
         {
             title: "Learn React",
@@ -39,6 +41,7 @@ const App = () => {
     ]);
 
     useEffect(() => {
+        //On load, get todos and convert them to an array, then set todos to that array
         const data = localStorage.getItem("todos");
         if (data) {
             setTodos(JSON.parse(data));
@@ -46,21 +49,30 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        //Everytime todos changes, save those changes to local storage
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
 
+    //Modal related functions (To add a Todo)
+    //Set the modal status (open or closed) to be reflected on isOpen, if it's true then open modal. Set a button to change that status.
     const openModal = () => {
         setIsOpen(true);
     };
     const closeModal = () => {
         setIsOpen(false);
     };
+
+    //Modal related functions (To add a Todo)
+
+    //Get every input, make an array from that node-list and for each one of those change it's value to an empty string
+    //so that everytime the user submits something the input stays clean
     const handleReset = () => {
         Array.from(document.querySelectorAll("input")).forEach(
             (input) => (input.value = "")
         );
     };
 
+    //Functions to collect the task's data
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
@@ -72,6 +84,7 @@ const App = () => {
     const handlePriorityChange = (e) => {
         setPriority(e.target.value);
     };
+    //Functions to collect the task's data
 
     const onSubmitTodo = (e) => {
         e.preventDefault();
@@ -98,6 +111,9 @@ const App = () => {
         setTodos([]);
     };
 
+    //Object that works as a momentary data storage.
+    //The data I collected gets sent to this object and with onSubmitTodo that object gets added to todos(the array)
+    //Then, on the same function, this objects return to this state
     let newTodo = {
         title: "",
         description: "",
@@ -107,6 +123,7 @@ const App = () => {
         edit: false,
     };
 
+    //Returns the index of the task it's given (The task is a todo. I feed it the task on DisplayTodos.js)
     const findTodoIndex = (task) => {
         const indexOfTodo = todos.findIndex((todo) => todo.id === task.id);
         return indexOfTodo;
@@ -122,6 +139,7 @@ const App = () => {
     const toggleComplete = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
+        //I'm sure there's a better way to do this, but this works just fine
         if (newTodoList[todoIndex].completed === false) {
             newTodoList[todoIndex].completed = true;
         } else {
@@ -141,6 +159,23 @@ const App = () => {
         setTodos(newTodoList);
     };
 
+    //I could make something like
+    /*
+    const toggle = (todo, key) {
+        let todoIndex = findTodoIndex(todo);
+        let newTodoList = [...todos];
+        //I'm sure there's a better way to do this, but this works just fine 
+        if (newTodoList[todoIndex].key === false) {
+            newTodoList[todoIndex].key = true;
+        } else {
+            newTodoList[todoIndex].key = false;
+        }
+        setTodos(newTodoList);
+    }
+    and save space
+    */
+
+    //Sort the array by prioirty with high on top so that it displays first
     const sortTodoArray = () => {
         todos.sort((a, b) => {
             const orders = { LOW: 2, MEDIUM: 1, HIGH: 0 };

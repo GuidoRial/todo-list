@@ -11,6 +11,9 @@ const DisplayTodos = ({
     findTodoIndex,
 }) => {
     //Never forget to wrap your props in {} so that React doesn't transform them to objects for some reason
+
+    //I cloned these functions as a momentary tool to edit the state of the todo I wanted to edit, as using the functions on App.js didn't work for some reason
+    //This is this code's weakest point, there's room for improvement
     const [editTitle, setEditTitle] = useState("");
     const [editDescription, setEditDescription] = useState("");
     const [editPriority, setEditPriority] = useState("LOW");
