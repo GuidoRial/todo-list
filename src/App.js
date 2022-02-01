@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Footer from "./Components/Footer";
 import uniqid from "uniqid";
@@ -10,14 +10,13 @@ const App = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("LOW");
-    const [edit, setEdit] = useState(false);
     const [todos, setTodos] = useState([
         {
             title: "Learn React",
-            description: "Dedicate this day to learn React",
+            description: "Make a todo-list to test my knowledge",
             id: uniqid(),
             completed: false,
-            priority: "HIGH",
+            priority: "MEDIUM",
             edit: false,
         },
         {
@@ -28,7 +27,26 @@ const App = () => {
             priority: "HIGH",
             edit: false,
         },
+        {
+            title: "Make dinner",
+            description: "Homemade pizza on a week-day, awesome",
+            id: uniqid(),
+            completed: false,
+            priority: "LOW",
+            edit: false,
+        },
     ]);
+
+    useEffect(() => {
+        const data = localStorage.getItem("todos");
+        if (data) {
+            setTodos(JSON.parse(data));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
 
     const openModal = () => {
         setIsOpen(true);
@@ -122,10 +140,13 @@ const App = () => {
         setTodos(newTodoList);
     };
 
-    todos.sort((a, b) => {
-        const orders = { LOW: 2, MEDIUM: 1, HIGH: 0 };
-        return orders[a.priority] - orders[b.priority]
-    });
+    const sortTodoArray = () => {
+        todos.sort((a, b) => {
+            const orders = { LOW: 2, MEDIUM: 1, HIGH: 0 };
+            return orders[a.priority] - orders[b.priority];
+        });
+    };
+    sortTodoArray();
 
     return (
         <div className="App">
