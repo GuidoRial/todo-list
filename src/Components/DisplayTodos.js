@@ -6,18 +6,7 @@ const DisplayTodos = ({
     deleteTodo,
     toggleComplete,
     toggleEdit,
-    handleTitleChange,
-    handleDescriptionChange,
-    handlePriorityChange,
-    onSubmitTodo,
     newTodo,
-    title,
-    description,
-    priority,
-    setTitle,
-    setDescription,
-    setPriority,
-    editFunction,
     setTodos,
     findTodoIndex,
 }) => {
@@ -54,8 +43,12 @@ const DisplayTodos = ({
         }
         newTodoList[todoIndex] = newTodo;
         setTodos(newTodoList);
+        setEditDescription("");
+        setEditDescription("");
+        setEditPriority("LOW");
+        todo.edit = false;
     };
-    console.log(newTodo);
+
     return (
         <div>
             <button onClick={emptyTodoList}>Empty Todo List</button>

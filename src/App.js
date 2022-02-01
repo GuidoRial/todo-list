@@ -81,7 +81,7 @@ const App = () => {
 
     let newTodo = {
         title: "",
-        description: "",    
+        description: "",
         id: uniqid(),
         completed: false,
         priority: "LOW",
@@ -111,29 +111,6 @@ const App = () => {
         setTodos(newTodoList);
     };
 
-    const editFunction = (todo) => {
-        let todoIndex = findTodoIndex(todo);
-        let newTodoList = [...todos];
-        if (title === "" || description === "") {
-            alert("Fields can't be empty");
-            return;
-        }
-        newTodo.title = title;
-        newTodo.description = description;
-        if (priority === "HIGH" || priority === "MEDIUM") {
-            newTodo.priority = priority;
-        } else {
-            newTodo.priority = "LOW";
-        }
-        newTodoList[todoIndex] = newTodo;
-        setTodos(newTodoList);
-        toggleEdit(todo);
-        setTitle("");
-        setDescription("");
-        setPriority("LOW");
-        handleReset();    
-    };
-
     const toggleEdit = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
@@ -144,8 +121,6 @@ const App = () => {
         }
         setTodos(newTodoList);
     };
-
-
 
     return (
         <div className="App">
@@ -174,21 +149,8 @@ const App = () => {
                 emptyTodoList={emptyTodoList}
                 deleteTodo={deleteTodo}
                 toggleComplete={toggleComplete}
-                openModal={openModal}
-                closeModal={closeModal}
                 toggleEdit={toggleEdit}
-                handleTitleChange={handleTitleChange}
-                handleDescriptionChange={handleDescriptionChange}
-                handlePriorityChange={handlePriorityChange}
-                onSubmitTodo={onSubmitTodo}
                 newTodo={newTodo}
-                title={title}
-                description={description}
-                priority={priority}
-                setTitle={setTitle}
-                setDescription={setDescription}
-                setPriority={setPriority}
-                editFunction={editFunction}
                 setTodos={setTodos}
                 findTodoIndex={findTodoIndex}
             />
