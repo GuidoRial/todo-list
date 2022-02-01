@@ -10,6 +10,7 @@ const App = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("LOW");
+    const [edit, setEdit] = useState(false);
     const [todos, setTodos] = useState([
         {
             title: "Learn React",
@@ -17,6 +18,7 @@ const App = () => {
             id: uniqid(),
             completed: false,
             priority: "HIGH",
+            edit: false,
         },
         {
             title: "Give Guido a job as a front end developer",
@@ -24,6 +26,7 @@ const App = () => {
             id: uniqid(),
             completed: false,
             priority: "HIGH",
+            edit: false,
         },
     ]);
 
@@ -78,10 +81,11 @@ const App = () => {
 
     let newTodo = {
         title: "",
-        description: "",
+        description: "",    
         id: uniqid(),
         completed: false,
         priority: "LOW",
+        edit: false,
     };
 
     const findTodoIndex = (task) => {
@@ -107,11 +111,41 @@ const App = () => {
         setTodos(newTodoList);
     };
 
-    const editTodo = (todo) => {
+    const editFunction = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
-        //Crear nuevo modal que en input tome {todo.title} {todo.description } && {todo.priority}, se les pasa las handlerFunctions, usa esa data para updatear como en toggleComplete y setTodos(newTodoList)
+        if (title === "" || description === "") {
+            alert("Fields can't be empty");
+            return;
+        }
+        newTodo.title = title;
+        newTodo.description = description;
+        if (priority === "HIGH" || priority === "MEDIUM") {
+            newTodo.priority = priority;
+        } else {
+            newTodo.priority = "LOW";
+        }
+        newTodoList[todoIndex] = newTodo;
+        setTodos(newTodoList);
+        toggleEdit(todo);
+        setTitle("");
+        setDescription("");
+        setPriority("LOW");
+        handleReset();    
     };
+
+    const toggleEdit = (todo) => {
+        let todoIndex = findTodoIndex(todo);
+        let newTodoList = [...todos];
+        if (newTodoList[todoIndex].edit === false) {
+            newTodoList[todoIndex].edit = true;
+        } else {
+            newTodoList[todoIndex].edit = false;
+        }
+        setTodos(newTodoList);
+    };
+
+
 
     return (
         <div className="App">
@@ -142,6 +176,21 @@ const App = () => {
                 toggleComplete={toggleComplete}
                 openModal={openModal}
                 closeModal={closeModal}
+                toggleEdit={toggleEdit}
+                handleTitleChange={handleTitleChange}
+                handleDescriptionChange={handleDescriptionChange}
+                handlePriorityChange={handlePriorityChange}
+                onSubmitTodo={onSubmitTodo}
+                newTodo={newTodo}
+                title={title}
+                description={description}
+                priority={priority}
+                setTitle={setTitle}
+                setDescription={setDescription}
+                setPriority={setPriority}
+                editFunction={editFunction}
+                setTodos={setTodos}
+                findTodoIndex={findTodoIndex}
             />
 
             <Footer />
