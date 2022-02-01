@@ -30,9 +30,12 @@ const DisplayTodos = ({
         setEditPriority(e.target.value);
     };
 
+
+    //I tried making the input value as {todo.value} but it didn't let me edit it
     const editTodo = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
+        //Open the edition div, if I press edit and there's an input with no value, retain the original value
         newTodo.title = editTitle === "" ? todo.title : editTitle;
         newTodo.description =
             editDescription === "" ? todo.description : editDescription;
