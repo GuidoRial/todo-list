@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import uniqid from "uniqid";
 import Modal from "react-modal";
 import DisplayTodos from "./Components/DisplayTodos";
+import Header from "./Components/Header"
 
 const App = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -150,37 +151,51 @@ const App = () => {
 
     return (
         <div className="App">
-            <button onClick={openModal}>Add item to Todo List</button>
-            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-                <button onClick={closeModal}>Close</button>
-                <form onSubmit={onSubmitTodo}>
-                    <label htmlFor="title">Title:</label>
-                    <input onChange={handleTitleChange}></input>
-                    <label htmlFor="description">Description:</label>
-                    <input onChange={handleDescriptionChange}></input>
-                    <label htmlFor="priority"></label>
-                    <select onChange={handlePriorityChange}>
-                        <option value={"LOW"}>LOW</option>
-                        <option value={"MEDIUM"}>MEDIUM</option>
-                        <option value={"HIGH"}>HIGH</option>
-                    </select>
-                    <button type="submit">
-                        <i className="fa fa-plus-square" aria-hidden="true"></i>
-                    </button>
-                </form>
-            </Modal>
+            <Header/>
+            <div className="main-container">
+                <button onClick={openModal}>Add item to Todo List</button>
+                <div className="modal-container">
+                    <Modal
+                        isOpen={modalIsOpen}
+                        ariaHideApp={false}
+                        className="modal"
+                    >
+                        <button
+                            onClick={closeModal}
+                            className="close-modal-button"
+                        >
+                            X
+                        </button>
+                        <form onSubmit={onSubmitTodo} className="add-todo-form">
+                            <label htmlFor="title">Title:</label>
+                            <input onChange={handleTitleChange}></input>
+                            <label htmlFor="description">Description:</label>
+                            <input onChange={handleDescriptionChange}></input>
+                            <label htmlFor="priority"></label>
+                            <div className="option-container">
+                                <select onChange={handlePriorityChange}>
+                                    <option value={"LOW"}>LOW</option>
+                                    <option value={"MEDIUM"}>MEDIUM</option>
+                                    <option value={"HIGH"}>HIGH</option>
+                                </select>
+                            </div>
 
-            <DisplayTodos
-                todos={todos}
-                emptyTodoList={emptyTodoList}
-                deleteTodo={deleteTodo}
-                toggleComplete={toggleComplete}
-                toggleEdit={toggleEdit}
-                newTodo={newTodo}
-                setTodos={setTodos}
-                findTodoIndex={findTodoIndex}
-            />
+                            <button type="submit" className="add-todo-button">Add new Todo</button>
+                        </form>
+                    </Modal>
+                </div>
 
+                <DisplayTodos
+                    todos={todos}
+                    emptyTodoList={emptyTodoList}
+                    deleteTodo={deleteTodo}
+                    toggleComplete={toggleComplete}
+                    toggleEdit={toggleEdit}
+                    newTodo={newTodo}
+                    setTodos={setTodos}
+                    findTodoIndex={findTodoIndex}
+                />
+            </div>
             <Footer />
         </div>
     );

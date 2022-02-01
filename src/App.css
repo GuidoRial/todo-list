@@ -1,9 +1,9 @@
 .App {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+}
+
+body {
+    background-color: #6c81cd;
 }
 
 .footer {
@@ -17,4 +17,79 @@
 .footer > i {
     cursor: pointer;
     margin: 0px 5px;
+}
+
+.header {
+    width: 90%;
+    padding: 0px 20px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.modal-container {
+    width: 50%;
+    height: 50%;
+}
+
+.modal {
+    width: 30%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 15% auto;
+    padding: 20px;
+    border: none;
+    background-color: rgba(108, 129, 205, 0.9);
+    color: white;
+}
+.close-modal-button {
+    border: none;
+    background-color: white;
+    color: #6c81cd;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-todo-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.add-todo-form > input {
+    width: 300px;
+    height: 25px;
+    padding: 3px;
+    border-radius: 5px;
+    border: none;
+}
+.add-todo-form > input:focus {
+    border: none;
+    outline: none;
+}
+
+select {
+    width: 200px;
+    height: 25px;
+    background-color: white;
+    color: rgb(108, 129, 205);
+}
+
+.add-todo-button {
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    height: 25px;
+    margin-top: 5px;
+    color: rgb(108, 129, 205);
+    cursor: pointer;
 }
