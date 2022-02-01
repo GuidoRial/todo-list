@@ -63,7 +63,6 @@ body {
     cursor: pointer;
 }
 
-border-bottom: 1px solid rgb(108, 129, 205);
 .add-todo-form {
     display: flex;
     justify-content: center;

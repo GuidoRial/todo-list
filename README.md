@@ -1,4 +1,16 @@
-# To-Do's
-7. Add style
-8. Ev. login system with google and save in google account. https://www.youtube.com/watch?v=75aTZq-qoZk&ab_channel=CodingwithBasir
-9. Header for login???
+# To-Do List
+
+## Live Preview
+https://guidorial.github.io/todo-list
+
+## General Info
+This project was made as part of The Odin Project's curriculum. 
+
+## What I used
+  *  CSS
+  *  JavaScript
+  *  React
+
+## What I learned
+  *  Gained further understanding of React Hooks (useState and useEffect)
+  *  I learned how to use localStorage
