@@ -96,22 +96,6 @@ const App = () => {
         setTodos(newTodoList);
     };
 
-    const scratchTextStyle = {
-        textDecorationLine: "line-through",
-        textDecorationStyle: "solid",
-    };
-
-    const normalTextStyle = {
-        textDecorationLine: "none",
-        textDecorationStyle: "none",
-    };
-
-    const [textStyle, setTextStyle] = useState(normalTextStyle);
-
-    const addScratch = () => {
-        console.log("test");
-    };
-
     const toggleComplete = (todo) => {
         let todoIndex = findTodoIndex(todo);
         let newTodoList = [...todos];
@@ -121,6 +105,12 @@ const App = () => {
             newTodoList[todoIndex].completed = false;
         }
         setTodos(newTodoList);
+    };
+
+    const editTodo = (todo) => {
+        let todoIndex = findTodoIndex(todo);
+        let newTodoList = [...todos];
+        //Crear nuevo modal que en input tome {todo.title} {todo.description } && {todo.priority}, se les pasa las handlerFunctions, usa esa data para updatear como en toggleComplete y setTodos(newTodoList)
     };
 
     return (
@@ -150,6 +140,8 @@ const App = () => {
                 emptyTodoList={emptyTodoList}
                 deleteTodo={deleteTodo}
                 toggleComplete={toggleComplete}
+                openModal={openModal}
+                closeModal={closeModal}
             />
 
             <Footer />

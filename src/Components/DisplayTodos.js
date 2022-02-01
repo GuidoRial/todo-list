@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
 
-const DisplayTodos = ({ todos, emptyTodoList, deleteTodo, toggleComplete }) => {
+const DisplayTodos = ({
+    todos,
+    emptyTodoList,
+    deleteTodo,
+    toggleComplete,
+    openModal,
+    closeModal,
+}) => {
     //Never forget to wrap your props in {} so that React doesn't transform them to objects for some reason
 
     return (
@@ -45,7 +53,7 @@ const DisplayTodos = ({ todos, emptyTodoList, deleteTodo, toggleComplete }) => {
                                     aria-hidden="true"
                                 ></i>
                             </button>
-                            <button>
+                            <button onClick={() => openModal()}>
                                 <i className="fas fa-edit"></i>
                             </button>
                             <button onClick={() => deleteTodo(todo)}>
