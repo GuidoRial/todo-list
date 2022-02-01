@@ -120,6 +120,7 @@ const App = () => {
         } else {
             newTodoList[todoIndex].completed = false;
         }
+        setTodos(newTodoList);
     };
 
     return (

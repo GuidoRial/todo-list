@@ -2,16 +2,42 @@ import React, { useState } from "react";
 
 const DisplayTodos = ({ todos, emptyTodoList, deleteTodo, toggleComplete }) => {
     //Never forget to wrap your props in {} so that React doesn't transform them to objects for some reason
-    console.log(todos); 
+
     return (
         <div>
             <button onClick={emptyTodoList}>Empty Todo List</button>
-            <ul>
+            <div>
                 {todos.map((todo) => {
                     return (
                         <div key={todo.id}>
-                            <li>{todo.title}</li>
-                            <div>{todo.description}</div>
+                            <div
+                                style={{
+                                    textDecorationLine:
+                                        todo.completed === true
+                                            ? "line-through"
+                                            : "none",
+                                    textDecorationStyle:
+                                        todo.completed === true
+                                            ? "solid"
+                                            : "none",
+                                }}
+                            >
+                                {todo.title}
+                            </div>
+                            <div
+                                style={{
+                                    textDecorationLine:
+                                        todo.completed === true
+                                            ? "line-through"
+                                            : "none",
+                                    textDecorationStyle:
+                                        todo.completed === true
+                                            ? "solid"
+                                            : "none",
+                                }}
+                            >
+                                {todo.description}
+                            </div>
                             <div>{todo.priority}</div>
                             <button onClick={() => toggleComplete(todo)}>
                                 <i
@@ -31,7 +57,7 @@ const DisplayTodos = ({ todos, emptyTodoList, deleteTodo, toggleComplete }) => {
                         </div>
                     );
                 })}
-            </ul>
+            </div>
         </div>
     );
 };
